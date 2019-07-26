@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts
+{
+    <script src="~/Scripts/mustache.min.js"></script>
+    <script src="~/Scripts/plugin/jquery.twbsPagination.min.js"></script>
+    <script src="~/Scripts/controller/Homecontroller.js"></script>
+}
+<div class="row">
+    <table class=" table">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name </td>
+                <td>Salary</td>
+                <td>Statue</td>
+            </tr>
+        </thead>
+        <tbody id="tbData"></tbody>
+    </table>
+</div>
+<!--Paginnattion-->
+<div id="paging" class="pagination">
+
+</div>
+<!--Symtax of muscashe | must be true according to the name of the attribute-->
+<script id="templateBilding" type="x-tmpl-mustache">
+    <tr>
+        <td>{{ID}}</td>
+        <td>{{Name}} </td>
+        <td><input type="number" class="txtSalary" data-id="{{ID}}" name="" value="{{Salary}}" /> </td>
+        <td>{{{Statue}}}</td><!--Để 3 dấu nháy đối với xây dựng cho html-->
+    </tr>
+</script>
