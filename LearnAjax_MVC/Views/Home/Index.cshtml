@@ -10,6 +10,9 @@
     <script src="~/Scripts/controller/Homecontroller.js"></script>
 }
 <div class="row">
+    <button id="btnadd" class="btn btn-success"> Member!</button>
+</div>
+<div class="row">
     <table class=" table">
         <thead>
             <tr>
@@ -17,6 +20,7 @@
                 <td>Name </td>
                 <td>Salary</td>
                 <td>Statue</td>
+                <td>#</td>     
             </tr>
         </thead>
         <tbody id="tbData"></tbody>
@@ -33,5 +37,45 @@
         <td>{{Name}} </td>
         <td><input type="number" class="txtSalary" data-id="{{ID}}" name="" value="{{Salary}}" /> </td>
         <td>{{{Statue}}}</td><!--Để 3 dấu nháy đối với xây dựng cho html-->
+        <td  class="btn btn-primary btnEdit" data-id="{{ID}}">Edit</td>
+        <td class="btn btn-danger btnDelete" data-id="{{ID}}">Delete</td>
+
     </tr>
 </script>
+<!--Model boostrap-->
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="txtName">Name:</label>
+                    <input type="text" class="form-control" id="txtName">
+                    <input type="hidden" id="hidID" name="name" value="0" />
+                </div>
+                <div class="form-group">
+                    <label for="txtSalary">Salary:</label>
+                    <input type="number" class="form-control" id="txtSalary">
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" id="ckbCheck" name="name" />Active.</label>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit"  id="btnsave" class="btn btn-success" >Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div> 

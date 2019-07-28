@@ -83,7 +83,7 @@ namespace LearnAjax_MVC.Controllers
             return View();
         }
         //paging with ajax here
-        public JsonResult LoadMydata(int page,int pagesize=3)
+        public JsonResult LoadMydata(int page,int pagesize=5)
         {
             var Model = listEmployess.Skip((page - 1) * pagesize).Take(pagesize);
             int TotalRow = listEmployess.Count();
@@ -96,21 +96,48 @@ namespace LearnAjax_MVC.Controllers
                 
         }
         [HttpPost]
-        public JsonResult UpdateMember(string model)
+        public JsonResult SaveData(string strEmployee)
         {
             //chuyển jsom qua oject
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            EmployessModel member = serializer.Deserialize<EmployessModel>(model);
-            //Cập nhật
-            var Entity = listEmployess.Single(x => x.ID == member.ID);
-            Entity.Salary = member.Salary;
+            EmployessModel member = serializer.Deserialize<EmployessModel>(strEmployee);
+            if(int.Parse( member.ID)==0)
+            {
+                listEmployess.Add(member);
+               
+            }else
+            {
+                var Entity = listEmployess.Single(x => x.ID == member.ID);
+                Entity.Salary = member.Salary;
+                Entity.Name = member.Name;
+                Entity.Statue = member.Statue;
+            }
+           
             return Json(new
             {
                 statue = true
             });
 
         }
-
+        [HttpGet]
+        public JsonResult getEmployeeDetail(string ID)
+        {
+            var model = listEmployess.Single(x => x.ID == ID);
+            return Json(new
+            {
+                data=model,
+                status = true
+            }, JsonRequestBehavior.AllowGet);//always have to have JsonRequestBehavior.AllowGet
+        }
+        [HttpPost]
+        public JsonResult deleteItem(string ID)
+        {
+            var model = listEmployess.Remove(listEmployess.Single(x=>x.ID==ID));
+            return Json(new
+            {
+                status = true
+            }, JsonRequestBehavior.AllowGet);//always have to have JsonRequestBehavior.AllowGet
+        }
 
     }
 }
